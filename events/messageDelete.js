@@ -18,7 +18,7 @@ module.exports = oldMessage => {
       )
       .setColor("RANDOM")
       .setTimestamp();
-    oldMessage.guild.channels.find("name", "logs").send({ embed });
+    oldMessage.guild.channels.find("name", "moderation-log").send({ embed });
   });
 };
 // End of Message Delete Event
