@@ -1,5 +1,5 @@
 // Start of Constants
-const Discord = require("Discord.js");
+const Discord = require("discord.js");
 // End of Constants
 
 // Start of "Serverinfo" Command
