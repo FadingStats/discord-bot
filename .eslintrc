@@ -1,0 +1,14 @@
+{
+  "extends": ["airbnb", "prettier"],
+  "rules": {
+    "func-names": ["error", "never"],
+    "linebreak-style": 0,
+    "dot-notation": "off",
+    "comma-dangle": 0,
+    "no-console": "off",
+    "consistent-return": "off",
+    "import/no-dynamic-require": "off",
+    "global-require": "off",
+    "no-param-reassign": "off"
+  }
+}
