@@ -1,6 +1,7 @@
 // Start of Constants
 // const Discord = require("discord.js");
 const config = require("../storage/settings.json");
+const fs = require("fs");
 // End of Constants
 
 // Start of Ready Event
@@ -15,8 +16,12 @@ module.exports = async client => {
       const guildId = client.mutes[i].guild;
       const guild = client.guilds.get(guildId);
       const member = guild.members.get(i);
-      const mutedRole = guild.roles.find(r => r.name === "Silenced");
-      const defaultRole = message.guild.roles.find(r => r.name === "Member");
+      const mutedRole = guild.roles.find(
+        r => r.name === config.silencedRoleName,
+      );
+      const defaultRole = message.guild.roles.find(
+        r => r.name === config.memberRoleName,
+      );
       if (!mutedRole);
 
       if (Date.now() > time) {

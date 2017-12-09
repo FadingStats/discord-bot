@@ -2,6 +2,7 @@
 const bugsnag = require("bugsnag");
 const request = require("superagent");
 const Discord = require("discord.js");
+const settings = require("../storage/settings.json");
 // End of Constants
 
 // Start of Functions
@@ -12,20 +13,23 @@ function jsUcfirst(string) {
 
 // Start of "Twitch" Command
 exports.run = (client, message) => {
-  message.delete().catch();
-  const botRoom = message.guild.channels.find("name", "bot-commands");
-  if (message.channel.id !== "383850372768202753") {
+  message.delete().catch(console.error);
+
+  if (message.channel.id !== settings.commandsChannel) {
+    const botRoom = message.guild.channels.find("id", settings.commandsChannel);
     message.channel.send(
       `Whoops, it looks like you're not in the ${botRoom} channel`,
     );
   } else {
-    message.delete().catch();
+    message.delete().catch(console.error);
     const argsOne = message.content.split(" ").slice(1);
     const result = argsOne.join(" ");
+
     if (!result) {
       message.channel.send("No channel specified!");
       return;
     }
+
     const url = `https://api.twitch.tv/kraken/streams/${result}`;
     request
       .get(url)

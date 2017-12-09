@@ -8,9 +8,9 @@ const settings = require("../storage/settings.json");
 exports.run = async (client, message, args) => {
   message.delete().catch(O_o => {});
   const user = message.mentions.users.first();
-  const modlog = client.channels.find("name", "moderation-log");
-  const caseNum = await caseNumber(client, modlog);
-  if (!modlog)
+  const modLog = client.channels.find("id", settings.moderationLogsChannel);
+  const caseNum = await caseNumber(client, modLog);
+  if (!modLog)
     return message.reply("I cannot find the moderation-log channel!");
   if (message.mentions.users.size < 1)
     return message
@@ -27,10 +27,10 @@ exports.run = async (client, message, args) => {
     .setDescription(
       `**Action:** Warning\n**Target:** ${user.tag}\n**Moderator:** ${
         message.author.tag
-      }\n**Reason:** ${reason}`
+      }\n**Reason:** ${reason}`,
     )
     .setFooter(`Case ${caseNum}`);
-  return client.channels.get(modlog.id).send({ embed });
+  return client.channels.get(modLog.id).send({ embed });
 };
 // End of "Warn" Command.
 
@@ -39,7 +39,7 @@ exports.conf = {
   enabled: true,
   guildOnly: false,
   aliases: ["w"],
-  permLevel: 0
+  permLevel: 1,
 };
 // End of Permission Level Setting, etc.
 
@@ -47,6 +47,6 @@ exports.conf = {
 exports.help = {
   name: "warn",
   description: "Issues a warning to the mentioned user.",
-  usage: "warn [mention] [reason]"
+  usage: "warn [mention] [reason]",
 };
 // End of Misc.

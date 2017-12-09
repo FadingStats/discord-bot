@@ -8,7 +8,7 @@ async function caseNumber(client, modlog) {
         m.embeds[0] &&
         m.embeds[0].type === "rich" &&
         m.embeds[0].footer &&
-        m.embeds[0].footer.text.startsWith("Case")
+        m.embeds[0].footer.text.startsWith("Case"),
     )
     .first();
   if (!log) return 1;

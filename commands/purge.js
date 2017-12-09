@@ -1,5 +1,5 @@
 // Start of "Purge" Command
-exports.run = async (client, message, args) => {
+exports.run = async (client, message) => {
   const messageTotal = parseInt(100);
 
   message.channel
@@ -7,7 +7,7 @@ exports.run = async (client, message, args) => {
     .then(messages => message.channel.bulkDelete(messages));
 
   console.log(
-    `${message.author.username} has wiped the ${message.channel.name} channel!`
+    `${message.author.username} has wiped the ${message.channel.name} channel!`,
   );
 };
 // End of "Purge" Command
@@ -17,7 +17,7 @@ exports.conf = {
   enabled: true,
   guildOnly: false,
   aliases: ["clear"],
-  permLevel: 0
+  permLevel: 10,
 };
 // End of Permission Level Setting, etc.
 
@@ -25,6 +25,6 @@ exports.conf = {
 exports.help = {
   name: "purge",
   description: "Clears the current channel the command is executed in.",
-  usage: "purge [number (2-100)]"
+  usage: "purge [number (2-100)]",
 };
 // End of Misc.

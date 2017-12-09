@@ -1,62 +1,63 @@
+// Start of Constants
+const settings = require("../storage/settings.json");
+// End of Constants
+
 // Start of "Radio" Command
 exports.run = (client, message, args) => {
-  const botRoom = message.guild.channels.find("name", "bot-commands");
-  const toJoin = client.channels.get("379696208622518272");
-  if (message.channel.id !== "383850372768202753") {
-    message.channel.id(
+  const toJoin = client.channels.get(settings.radioChannel);
+  const botRoom = message.guild.channels.find("id", settings.commandsChannel);
+
+  if (message.channel.id !== settings.commandsChannel) {
+    return message.channel.id(
       `Whoops, it looks like you're not in the ${botRoom} channel`,
     );
-    return 0;
   }
+
   if (args.length < 1 || args.length > 2) {
-    message.author.send([
+    return message.author.send([
       "ERROR: Not enough arguments",
       "Usage: `!radio <play> <(optional) truckersfm | eurotruck | capitalfm`",
     ]);
-    return 0;
   }
+
   if (args[0] === "stop") {
     toJoin.leave();
-    message.guild.channels
-      .find("name", "moderation-log")
-      .send("Radio has been stopped");
-    return 1;
+    return botRoom.send("Radio has been stopped");
   }
+
   if (!message.member.voiceChannel) {
-    message.channel.send(
+    return message.channel.send(
       "You are required to be in a voice channel to use this command",
     );
-    return 0;
   }
+
+  if (message.member.voiceChannel.id !== settings.radioChannel) {
+    return message.channel.send(
+      "You are required to be in the Radio channel to use this command",
+    );
+  }
+
   if (args[0] === "play") {
     toJoin
       .join()
       .then(connection => {
-        client.channels.get("383850372768202753");
-
         if (connection.playing) {
           connection.stopPlaying();
         }
 
         switch (args[1]) {
           case "truckersfm":
-            message.guild.channels
-              .find("name", "bot-commands")
-              .send("Now Playing: TruckersFM");
+            botRoom.send("Now Playing: TruckersFM");
             connection.playArbitraryInput("https://radio.truckers.fm/");
             break;
           case "eurotruck":
-            message.guild.channels
-              .find("name", "bot-commands")
-              .send("Now Playing: Euro Truck Radio");
+            botRoom.send("Now Playing: Euro Truck Radio");
             connection.playArbitraryInput(
               "http://radio.eurotruckradio.co.uk:8000/stream",
             );
             break;
           case "capitalfm":
-            message.guild.channels
-              .find("name", "bot-commands")
-              .send("Now Playing: CapitalFM");
+            botRoom.send("Now Playing: CapitalFM");
             connection.playArbitraryInput(
               "http://media-ice.musicradio.com/CapitalMP3",
             );
@@ -81,18 +82,12 @@ exports.run = (client, message, args) => {
                 Math.random() * radioArray.length,
               );
               connection.playArbitraryInput(radioArray[randomStream]["url"]);
-              message.guild.channels
-                .find("name", "bot-commands")
-                .send(`Now playing: ${radioArray[randomStream]["name"]}`);
+              botRoom.send(`Now playing: ${radioArray[randomStream]["name"]}`);
             }
             break;
         }
-        return 1;
       })
-      .catch(err => {
-        console.log(err);
-        return 0;
-      });
+      .catch(err => console.log(err));
   }
 };
 // End of "Radio" Command
@@ -102,7 +97,7 @@ exports.conf = {
   enabled: true,
   guildOnly: false,
   aliases: [],
-  permLevel: 0,
+  permLevel: 1,
 };
 // End of Permission Level Setting, etc.
 

@@ -4,7 +4,7 @@ const settings = require("../storage/settings.json");
 
 // Start of "Reason" Command
 exports.run = async (client, message, args) => {
-  const modlog = client.channels.find("name", "moderation-log");
+  const modLog = client.channels.find("id", settings.moderationLogsChannel);
   const caseNumber = args.shift();
   const newReason = args.join(" ");
 
@@ -26,7 +26,7 @@ exports.run = async (client, message, args) => {
     return embed;
   }
 
-  await modlog.fetchMessages({ limit: 100 }).then(messages => {
+  await modLog.fetchMessages({ limit: 100 }).then(messages => {
     const caseLog = messages
       .filter(
         m =>
@@ -38,7 +38,7 @@ exports.run = async (client, message, args) => {
           m.embeds[0].footer.text === `Case ${caseNumber}`,
       )
       .first();
-    modlog.fetchMessage(caseLog.id).then(logMsg => {
+    modLog.fetchMessage(caseLog.id).then(logMsg => {
       const embed = logMsg.embeds[0];
       embedSan(embed);
       embed.description = embed.description.replace(
@@ -58,7 +58,7 @@ exports.conf = {
   enabled: true,
   guildOnly: false,
   aliases: [],
-  permLevel: 0,
+  permLevel: 1,
 };
 // End of Permission Level Setting, etc.
 

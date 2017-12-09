@@ -30,38 +30,41 @@ const fortunes = [
 
 // Start of "8Ball" Command
 exports.run = (client, message) => {
-  message.delete().catch(O_o => {});
-  const botRoom = message.guild.channels.find("name", "bot-commands");
-  if (message.channel.id !== "383850372768202753") {
-    message.channel.send(
+  message.delete().catch(console.error);
+
+  if (message.channel.id !== settings.commandsChannel) {
+    const botRoom = message.guild.channels.find("id", settings.commandsChannel);
+    return message.channel.send(
       `Whoops, it looks like you're not in the ${botRoom} channel`,
     );
-  } else {
-    const args = message.content
-      .slice(settings.prefix.length)
-      .trim()
-      .split(/ +/g);
-    const result = Math.floor(Math.random() * fortunes.length + 0);
-    const userQuestion = args.slice(1, args.length).join(" ");
-    if (args[1]) {
-      if (!message.author.avatarURL) {
-        const embedNoAvatar = new Discord.RichEmbed()
-          .setAuthor(`${message.author.username}`, `${message.guild.iconURL}`)
-          .addField("Question:", `${userQuestion}`)
-          .addField("Answer:", fortunes[result]);
-        message.channel.send({ embed: embedNoAvatar });
-      } else {
-        const embed = new Discord.RichEmbed()
-          .setAuthor(
-            `${message.author.username}`,
-            `${message.author.avatarURL}`,
-          )
-          .addField("Question:", `${userQuestion}`)
-          .addField("Answer:", fortunes[result]);
-        message.channel.send({ embed });
-      }
-    } else console.log("Someone forgot to give a question!"); // message.channel.send(`You forgot to ask me a question, idiot!`);
   }
+
+  const args = message.content
+    .slice(settings.prefix.length)
+    .trim()
+    .split(/ +/g);
+  const result = Math.floor(Math.random() * fortunes.length + 0);
+  const userQuestion = args.slice(1, args.length).join(" ");
+
+  if (args[1]) {
+    if (!message.author.avatarURL) {
+      const embedNoAvatar = new Discord.RichEmbed()
+        .setAuthor(`${message.author.username}`, `${message.guild.iconURL}`)
+        .addField("Question:", `${userQuestion}`)
+        .addField("Answer:", fortunes[result]);
+
+      return message.channel.send({ embed: embedNoAvatar });
+    }
+
+    const embed = new Discord.RichEmbed()
+      .setAuthor(`${message.author.username}`, `${message.author.avatarURL}`)
+      .addField("Question:", `${userQuestion}`)
+      .addField("Answer:", fortunes[result]);
+    return message.channel.send({ embed });
+  }
+
+  return console.log("Someone forgot to give a question!");
+  // message.channel.send(`You forgot to ask me a question, idiot!`);
 };
 // End of "8Ball" Command
 
