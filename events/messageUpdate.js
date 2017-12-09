@@ -1,5 +1,6 @@
 // Start of Constants
 const Discord = require("discord.js");
+const settings = require("../storage/settings.json");
 // End of Constants
 
 // Start of Message Update Event
@@ -21,7 +22,9 @@ module.exports = (oldMessage, newMessage) => {
         )
         .setColor("RANDOM")
         .setTimestamp();
-      newMessage.guild.channels.find("name", "logs").send({ embed });
+      newMessage.guild.channels
+        .find("id", settings.moderationLogsChannel)
+        .send({ embed });
     });
   }
 };

@@ -1,7 +1,11 @@
 {
-  "ownerid": "212272569594806274",
-  "modrolename": "Moderator",
-  "adminrolename": "Discord Admin",
+  "botName": "HGVMP Bot",
   "prefix": "!",
-  "botName": "HGVMP Bot"
+  "adminRoleName": "Discord Admin",
+  "silencedRoleName": "Silenced",
+  "memberRoleName": "Member",
+  "commandsChannel": "383850372768202753",
+  "moderationLogsChannel": "380555872105005058",
+  "membersLogsChannel": "383903272378957824",
+  "radioChannel": "379696208622518272"
 }

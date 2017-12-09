@@ -54,18 +54,25 @@ client.reload = command =>
     }
   });
 // End of Reload Command
+
 // Elevation of Messages (Permission System, etc.)
 client.elevation = message => {
   /* This function should resolve to an ELEVATION level which
   is then sent to the command handler for verification */
-  let permlvl = 0;
-  const modRole = message.guild.roles.find("name", settings.modrolename);
-  const adminRole = message.guild.roles.find("name", settings.adminrolename);
+  const adminRole = message.guild.roles.find("name", settings.adminRoleName);
 
-  if (modRole && message.member.roles.has(modRole.id)) permlvl = 2;
-  if (adminRole && message.member.roles.has(adminRole.id)) permlvl = 3;
-  if (message.author.id === settings.ownerid) permlvl = 4;
-  return permlvl;
+  // Has Discord Admin role
+  if (adminRole && message.member.roles.has(adminRole.id)) {
+    return 10;
+  }
+
+  // Has MANAGE_MESSAGES permission
+  if (message.member.permissions.has("MANAGE_MESSAGES")) {
+    return 1;
+  }
+
+  // Not enough permissions
+  return 0;
 };
 // End of Elevation of Messages
 

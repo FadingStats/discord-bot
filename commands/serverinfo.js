@@ -1,11 +1,12 @@
 // Start of Constants
+const settings = require("../storage/settings.json");
 const Discord = require("discord.js");
 // End of Constants
 
 // Start of "Serverinfo" Command
-exports.run = (client, message, server) => {
-  const botRoom = message.guild.channels.find("name", "bot-commands");
-  if (message.channel.id !== "383850372768202753") {
+exports.run = (client, message) => {
+  if (message.channel.id !== settings.commandsChannel) {
+    const botRoom = message.guild.channels.find("id", settings.commandsChannel);
     message.channel.send(
       `Whoops, it looks like you're not in the ${botRoom} channel`,
     );

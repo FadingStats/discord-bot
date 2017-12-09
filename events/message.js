@@ -20,7 +20,10 @@ module.exports = message => {
     cmd = client.commands.get(client.aliases.get(command));
   }
   if (cmd) {
-    if (perms < cmd.conf.permLevel) return;
+    if (perms < cmd.conf.permLevel) {
+      return message.author.send(["ERROR: Permission denied"]);
+    }
+
     cmd.run(client, message, params, perms);
   }
 };

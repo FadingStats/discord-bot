@@ -1,4 +1,5 @@
 // Start of Constants
+const settings = require("../storage/settings.json");
 const Cleverbot = require("cleverbot-node");
 
 const cleverbot = new Cleverbot();
@@ -7,18 +8,19 @@ cleverbot.configure({ botapi: process.env.clever_api_key });
 
 // Start of "Cleverbot" Command
 exports.run = (client, message, args) => {
-  message.delete().catch(O_o => {});
-  const botRoom = message.guild.channels.find("name", "bot-commands");
-  if (message.channel.id !== "383850372768202753") {
-    message.channel.send(
+  message.delete().catch(console.error);
+
+  if (message.channel.id !== settings.commandsChannel) {
+    const botRoom = message.guild.channels.find("id", settings.commandsChannel);
+    return message.channel.send(
       `Whoops, it looks like you're not in the ${botRoom} channel`,
     );
-  } else {
-    const cleverbotQuestion = args.slice(1).join(" ");
-    cleverbot.write(cleverbotQuestion, response => {
-      message.channel.send(`${message.author}, ${response.output}`);
-    });
   }
+
+  const cleverbotQuestion = args.slice(1).join(" ");
+  cleverbot.write(cleverbotQuestion, response => {
+    message.channel.send(`${message.author}, ${response.output}`);
+  });
 };
 // End of "Cleverbot" Command
 

@@ -5,12 +5,15 @@ const settings = require("../storage/settings.json");
 // Start of "Help" Command
 exports.run = (client, message, params) => {
   message.delete().catch();
-  if (message.channel.id !== "383850372768202753") {
-    const botRoom = message.guild.channels.find("name", "bot-commands");
-    message.channel.send(
+
+  if (message.channel.id !== settings.commandsChannel) {
+    const botRoom = message.guild.channels.find("id", settings.commandsChannel);
+    return message.channel.send(
       `Whoops, it looks like you're not in the ${botRoom} channel`,
     );
-  } else if (!params[0]) {
+  }
+
+  if (!params[0]) {
     const commandNames = Array.from(client.commands.keys());
     const longest = commandNames.reduce(
       (long, str) => Math.max(long, str.length),
