@@ -6,6 +6,9 @@ const settings = require("../storage/settings.json");
 // Start of Message Update Event
 module.exports = (oldMessage, newMessage) => {
   if (oldMessage.content !== newMessage.content) {
+    if(oldMessage.channel.id === '385816995460939776' || '385820799505924105' ){
+      return;
+    }
     newMessage.guild.fetchAuditLogs().then(() => {
       // const user = logs.entries.first().executor;
       const embed = new Discord.RichEmbed()
