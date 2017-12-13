@@ -13,12 +13,12 @@ module.exports = oldMessage => {
 
     if (client.commands.has(command) || client.aliases.has(command)) return;
   }
-
+  
+  if(oldMessage.channel.id === '385816995460939776' || '385820799505924105' ){
+    return;
+  }
   oldMessage.guild.fetchAuditLogs().then(() => {
     // const user = logs.entries.first().executor;
-    if(oldMessage.channel.id === '385816995460939776' || '385820799505924105' ){
-      return;
-    }
       const embed = new Discord.RichEmbed()
       .setAuthor(oldMessage.author.tag, oldMessage.author.displayAvatarURL)
       .setDescription(
