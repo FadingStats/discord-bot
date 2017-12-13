@@ -13,10 +13,13 @@ module.exports = oldMessage => {
 
     if (client.commands.has(command) || client.aliases.has(command)) return;
   }
-
+  
+  if(oldMessage.channel.id === '385816995460939776' || '385820799505924105' ){
+    return;
+  }
   oldMessage.guild.fetchAuditLogs().then(() => {
     // const user = logs.entries.first().executor;
-    const embed = new Discord.RichEmbed()
+      const embed = new Discord.RichEmbed()
       .setAuthor(oldMessage.author.tag, oldMessage.author.displayAvatarURL)
       .setDescription(
         `**Message Sent by ${oldMessage.author} in ${
@@ -31,6 +34,6 @@ module.exports = oldMessage => {
     oldMessage.guild.channels
       .find("id", settings.moderationLogsChannel)
       .send({ embed });
-  });
+    });
 };
 // End of Message Delete Event
