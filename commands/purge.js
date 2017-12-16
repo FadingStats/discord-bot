@@ -4,11 +4,21 @@ exports.run = async (client, message) => {
 
   message.channel
     .fetchMessages({ limit: messageTotal })
-    .then(messages => message.channel.bulkDelete(messages));
-
-  console.log(
-    `${message.author.username} has wiped the ${message.channel.name} channel!`,
-  );
+    .then(messages => {
+      message.channel.bulkDelete(messages);
+      message.channel
+        .send(
+        `Deletion of messages successful. Including the command issued by ${message.author}.\n\nThis message will be removed shortly.`
+        )
+        .then(message => message.delete(5000));
+      console.log(
+        `Deletion of messages successful. Including the command issued by ${message.author} and the message by ${client.user.username}.`
+      );
+    })
+    .catch(err => {
+      console.log("Error while attempting to purge the channel.");
+      console.log(err);
+    });
 };
 // End of "Purge" Command
 
