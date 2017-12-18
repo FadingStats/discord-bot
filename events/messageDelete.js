@@ -14,7 +14,7 @@ module.exports = oldMessage => {
     if (client.commands.has(command) || client.aliases.has(command)) return;
   }
   
-  if(oldMessage.channel.id === '385816995460939776' || '385820799505924105' ){
+  if(oldMessage.channel.id === '385816995460939776' & '385820799505924105' ){
     return;
   }
   oldMessage.guild.fetchAuditLogs().then(() => {
