@@ -8,7 +8,6 @@ cleverbot.configure({ botapi: process.env.clever_api_key });
 
 // Start of "Cleverbot" Command
 exports.run = (client, message, args) => {
-  message.delete().catch(console.error);
 
   if (message.channel.id !== settings.commandsChannel) {
     const botRoom = message.guild.channels.find("id", settings.commandsChannel);
