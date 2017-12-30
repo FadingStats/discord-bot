@@ -4,7 +4,6 @@ const settings = require("../storage/settings.json");
 
 // Start of "Help" Command
 exports.run = (client, message, params) => {
-  message.delete().catch();
 
   if (message.channel.id !== settings.commandsChannel) {
     const botRoom = message.guild.channels.find("id", settings.commandsChannel);

@@ -7,7 +7,6 @@ const settings = require("../storage/settings.json");
 
 // Start of "UserInfo" Command
 exports.run = async (client, message) => {
-  message.delete().catch(console.error);
   const botRoom = message.guild.channels.find("id", settings.commandsChannel);
 
   if (message.channel.id !== settings.commandsChannel) {

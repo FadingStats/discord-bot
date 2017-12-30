@@ -1,11 +1,10 @@
 // Start of Constants
-// const Discord = require("discord.js");
 const config = require("../storage/settings.json");
 const fs = require("fs");
 // End of Constants
 
 // Start of Ready Event
-module.exports = async client => {
+module.exports = async (client, guild) => {
   console.log(`\nBreaker breaker 1-9: ${config.botName} is now online, 10-65`);
 
   client.mutes = require("../storage/mutes.json");
@@ -55,7 +54,7 @@ module.exports = async client => {
     .then(
       console.log(
         `\n${client.user.username} is online with ${
-          client.users.size
+          client.guilds.map(g => g.memberCount)
         } users, in ${client.channels.size} channels of ${
           client.guilds.size
         } guilds`,

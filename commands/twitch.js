@@ -13,7 +13,6 @@ function jsUcfirst(string) {
 
 // Start of "Twitch" Command
 exports.run = (client, message) => {
-  message.delete().catch(console.error);
 
   if (message.channel.id !== settings.commandsChannel) {
     const botRoom = message.guild.channels.find("id", settings.commandsChannel);

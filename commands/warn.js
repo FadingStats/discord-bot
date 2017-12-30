@@ -6,7 +6,6 @@ const settings = require("../storage/settings.json");
 
 // Start of "Warn" Command.
 exports.run = async (client, message, args) => {
-  message.delete().catch(O_o => {});
   const user = message.mentions.users.first();
   const modLog = client.channels.find("id", settings.moderationLogsChannel);
   const caseNum = await caseNumber(client, modLog);

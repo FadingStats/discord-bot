@@ -7,7 +7,6 @@ const settings = require("../storage/settings.json");
 
 // Start of "Mute" Command
 exports.run = async (client, message, args) => {
-  message.delete().catch(console.error);
 
   if (args.length !== 1) {
     return message.author.send([

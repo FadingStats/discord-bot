@@ -11,7 +11,6 @@ exports.run = (client, message) => {
       `Whoops, it looks like you're not in the ${botRoom} channel`,
     );
   } else {
-    message.delete().catch();
     const embed = new Discord.RichEmbed()
       .setAuthor(message.guild.name, message.guild.iconURL, "https://hgvmp.com")
       .setColor("#5599FF")
