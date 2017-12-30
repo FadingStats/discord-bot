@@ -9,7 +9,6 @@ exports.run = async (client, message, args) => {
   const newReason = args.join(" ");
 
   async function embedSan(embed) {
-    message.delete().catch();
 
     if (embed.message) delete embed.message;
     if (embed.footer) delete embed.footer.embed;
