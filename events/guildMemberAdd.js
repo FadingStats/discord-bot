@@ -1,3 +1,5 @@
+const Discord = require('discord.js');
+
 // Start of Member Add Event
 module.exports = member => {
   console.log(`${member.user.username} has joined HGVMP!`);
