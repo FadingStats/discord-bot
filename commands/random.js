@@ -1,8 +1,10 @@
 // Start of Constants
 const settings = require("../storage/settings.json");
+const steamGroup = require('steam-group');
+const steam = require('steamidconvert')()
 // End of Constants
 
-// Start of "Random" Command
+// Start of "8Ball" Command
 exports.run = (client, message) => {
   if (message.channel.id !== settings.commandsChannel) {
     const botRoom = message.guild.channels.find("id", settings.commandsChannel);
@@ -10,12 +12,14 @@ exports.run = (client, message) => {
       `Whoops, it looks like you're not in the ${botRoom} channel`,
     );
   }
-  const members = client.users.map(x => x.id);
-  const output = members[Math.floor(Math.random() * members.length)];
-  const prizeWinner = client.users.get(output);
-  message.channel.send(`The random member I have selected is: ${prizeWinner}`);
+  const group = steamGroup.fromName('hgvmp');
+  group.getMembers(function(err, result){
+	  if(err) throw err
+	  const output = result[Math.floor(Math.random() * result.length)];
+	  message.guild.channels.find('name', 'announcements').send(`The winner of the 2nd Italia DLC goes to: https://steamcommunity.com/profiles/${output} Congratulations, whoever you may be ;)`);
+  });
 };
-// End of "Random" Command
+// End of "8Ball" Command
 
 // Start of Permission Level Setting, etc.
 exports.conf = {
