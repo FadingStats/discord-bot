@@ -4,7 +4,7 @@ const steamGroup = require('steam-group');
 const steam = require('steamidconvert')()
 // End of Constants
 
-// Start of "8Ball" Command
+// Start of "random" Command
 exports.run = (client, message) => {
   if (message.channel.id !== settings.commandsChannel) {
     const botRoom = message.guild.channels.find("id", settings.commandsChannel);
@@ -19,7 +19,7 @@ exports.run = (client, message) => {
 	  message.guild.channels.find('name', 'announcements').send(`The winner of the 2nd Italia DLC goes to: https://steamcommunity.com/profiles/${output} Congratulations, whoever you may be ;)`);
   });
 };
-// End of "8Ball" Command
+// End of "random" Command
 
 // Start of Permission Level Setting, etc.
 exports.conf = {
