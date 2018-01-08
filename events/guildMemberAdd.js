@@ -9,13 +9,14 @@ module.exports = (member) => {
 
   const welcomeChannel = member.guild.channels.find('name', 'welcome');
   const rulesChannel = member.guild.channels.find('name', 'rules');
+  const questionsChannel = member.guild.channels.find('name', 'questions');
   const embed = new Discord.RichEmbed()
     .setColor('RANDOM')
     .setTitle('New Member!')
     .setDescription(
       `Welcome ${member.user} to ${
         member.guild.name
-      }! Be sure to read ${rulesChannel} and enjoy your stay!`,
+      }! Be sure to read ${rulesChannel}, if you have any questions be sure to check out ${questionsChannel} also. Enjoy your stay!`,
     )
     .setThumbnail(
       member.user.avatarURL ||
