@@ -7,26 +7,26 @@ module.exports = async (message) => {
   const { client } = message;
 
   if (message.author.bot) return;
-  if (!message.content.startsWith(settings.prefix)) return;
+  if (message.content.startsWith(settings.prefix)){
+    const command = message.content.split(" ")[0].slice(settings.prefix.length);
+    const params = message.content.split(" ").slice(1);
+    const perms = client.elevation(message);
+    let cmd;
 
-  const command = message.content.split(" ")[0].slice(settings.prefix.length);
-  const params = message.content.split(" ").slice(1);
-  const perms = client.elevation(message);
-  let cmd;
-
-  if (client.commands.has(command)) {
-    cmd = client.commands.get(command);
-  } else if (client.aliases.has(command)) {
-    cmd = client.commands.get(client.aliases.get(command));
-  }
-  if (cmd) {
-    if (perms < cmd.conf.permLevel) {
-      return message.author.send(["ERROR: Permission denied"]);
+    if (client.commands.has(command)) {
+      cmd = client.commands.get(command);
+    } else if (client.aliases.has(command)) {
+      cmd = client.commands.get(client.aliases.get(command));
     }
+    if (cmd) {
+      if (perms < cmd.conf.permLevel) {
+        return message.author.send(["ERROR: Permission denied"]);
+      }
 
-    cmd.run(client, message, params, perms);
+      cmd.run(client, message, params, perms);
+    }
   }
-  
+ 
   
   if (message.channel.id === '378573675500273664') {
 
