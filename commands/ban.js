@@ -2,7 +2,7 @@
 const {RichEmbed} = require('discord.js');
 const {caseNumber} = require('../storage/caseNumber.js');
 const {parseUser} = require('../storage/parseUser.js');
-const settings = const settings = require("../storage/settings.json");
+const settings = require("../storage/settings.json");
 // End of Constants
 
 // Start of "Ban" Command
