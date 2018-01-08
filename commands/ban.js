@@ -31,7 +31,7 @@ exports.run = async (client, message, args) => {
     }\n**Reason:** ${reason}`,
   )
   .setFooter(`Case ${caseNum}`);
-return client.channels.get(modLog.id).send({ embed });
+return client.channels.get(modlog.id).send({ embed });
 };
 // End of "Warn" Command.
   
