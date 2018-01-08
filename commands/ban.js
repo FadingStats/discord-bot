@@ -11,7 +11,7 @@ exports.run = async (client, message, args) => {
   parseUser(message, user);
   const modlog = client.channels.find("id", settings.moderationLogsChannel);
   const caseNum = await caseNumber(client, modlog);
-  if (!modLog)
+  if (!modlog)
     return message.reply("I cannot find the moderation-log channel!");
   if (message.mentions.users.size < 1)
   return message
