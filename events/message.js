@@ -7,7 +7,7 @@ module.exports = message => {
   const { client } = message;
 
   if (message.author.bot) return;
-  if (!message.content.startsWith(settings.prefix)) return;
+  //   if (!message.content.startsWith(settings.prefix)) return;
 
   const command = message.content.split(" ")[0].slice(settings.prefix.length);
   const params = message.content.split(" ").slice(1);
@@ -25,6 +25,23 @@ module.exports = message => {
     }
 
     cmd.run(client, message, params, perms);
+  }
+  
+  
+  if (message.channel.id === '378573675500273664') {
+
+    const hgvmpChat = message.guild.channels.find("id", '380556463959048192');
+
+    const templateSuggestion = message.content.split(' ')[0];
+    const suggestionBody = message.content.split(' ').slice(1).join(' ');
+
+    if (templateSuggestion === 'Suggestion:' && suggestionBody) {
+      await message.react('387688773326209026')
+      await message.react('387688754258771968')
+    } else {
+      message.delete();
+      message.channel.send(`${message.author}, this channel is for suggestions \*\*only\*\*, if you wish to discuss a suggestion that has been made please use the ${hgvmpChat} channel. Otherwise, ensure your post follows the suggestion guideline when putting forward an idea:\n\n\`\`\`Suggestion:\nDescription:\nWhat benefits does it have?\nScreenshots / Images of Suggestion:\`\`\`\n\n\*This post will be removed in 15 seconds\*`).then(message => message.delete(15000));
+    }
   }
 };
 // End of Message Event
