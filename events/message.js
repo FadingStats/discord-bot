@@ -3,7 +3,7 @@ const settings = require("../storage/settings.json");
 // End of Constants
 
 // Start of Message Event
-module.exports = message => {
+module.exports = async (message) => {
   const { client } = message;
 
   if (message.author.bot) return;
