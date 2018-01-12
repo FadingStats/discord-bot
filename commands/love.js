@@ -1,3 +1,5 @@
+const settings = require("../storage/settings.json");
+
 // Start of "Love" Command
 exports.run = (client, message) => {
 
