@@ -4,19 +4,18 @@ const Discord = require('discord.js');
 module.exports = (member) => {
   console.log(`${member.user.username} has joined the server!`);
   
-  const role = member.guild.roles.find('name', 'Driver');
+  const role = member.guild.roles.find('name', 'Member');
   member.addRole(role);
 
   const welcomeChannel = member.guild.channels.find('name', 'welcome');
   const rulesChannel = member.guild.channels.find('name', 'rules');
-  const questionsChannel = member.guild.channels.find('name', 'questions');
   const embed = new Discord.RichEmbed()
     .setColor('RANDOM')
     .setTitle('New Member!')
     .setDescription(
       `Welcome ${member.user} to ${
         member.guild.name
-      }! Be sure to read ${rulesChannel}, if you have any questions be sure to check out ${questionsChannel} also. Enjoy your stay!`,
+      }! Be sure to read ${rulesChannel}, if you have any questions be sure to ask us, also. Enjoy your stay!`,
     )
     .setThumbnail(
       member.user.avatarURL ||
