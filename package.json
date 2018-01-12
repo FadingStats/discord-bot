@@ -1,5 +1,5 @@
 {
-  "name": "hgvmp",
+  "name": "quantum",
   "version": "1.0.0",
   "description": "The public bot used on our Discord server.",
   "main": "index.js",
