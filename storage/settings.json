@@ -1,13 +1,13 @@
 {
-  "botName": "HGVMP Bot",
+  "botName": "Quantum Bot",
   "prefix": "!",
   "adminRoleName": "Discord Admin",
   "silencedRoleName": "Silenced",
   "memberRoleName": "Member",
-  "commandsChannel": "383850372768202753",
-  "moderationLogsChannel": "380555872105005058",
-  "membersLogsChannel": "383903272378957824",
-  "radioChannel": "379696208622518272",
+  "commandsChannel": "401154789812994070",
+  "moderationLogsChannel": "401432286387765258",
+  "membersLogsChannel": "401432286387765258",
+  "radioChannel": "",
   "ignoredChannels":
   [
   "380340086543482882",
