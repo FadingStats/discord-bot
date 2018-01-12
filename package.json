@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint index.js",
+    "start": "node index.js"
   },
   "author": "Inclusive, estilate & Synplex",
   "license": "MIT",
